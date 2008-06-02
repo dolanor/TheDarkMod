@@ -246,7 +246,9 @@ typedef double			ILdouble;
 
 typedef double			ILclampd;
 
-typedef void			ILvoid;
+// 2008-06-02 tels: changed to a #define to make g++ 4.2 happy:
+//typedef void			ILvoid;
+#define ILvoid	void
 
 
 
