@@ -170,10 +170,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\lib\zlib\gzio.c"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\lib\zlib\gzlib.c"
 				>
 			</File>
