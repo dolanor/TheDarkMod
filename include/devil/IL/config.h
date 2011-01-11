@@ -14,7 +14,9 @@
 /* #undef GCC_X86_64_ASM */
 
 /* X86_ASM assembly found */
+#if !defined(__ppc__)
 #define GCC_X86_ASM 
+#endif
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #define HAVE_DLFCN_H 1
@@ -67,89 +69,38 @@
 /* Support X11 XShm extension */
 #define ILUT_USE_XSHM 
 
-/* BMP support */
 /* #undef IL_NO_BMP */
-
-/* DCX support */
-/* #undef IL_NO_DCX */
-
-/* GIF support */
+#define IL_NO_CUT
+#define IL_NO_CHEAD
+#define IL_NO_DCX
+/* #undef IL_NO_DDS */
+/* #undef IL_NO_DOOM */
 /* #undef IL_NO_GIF */
-
-/* HDR support */
-/* #undef IL_NO_HDR */
-
-/* ICNS support */
-/* #undef IL_NO_ICNS */
-
-/* ICON support */
-/* #undef IL_NO_ICON */
-
-/* JP2 support */
-#define IL_NO_JP2 
-
-/* JPG support */
-//#define IL_NO_JPG 
-
-/* LCMS support */
-#define IL_NO_LCMS 
-
-/* LIF support */
-/* #undef IL_NO_LIF */
-
-/* MDL support */
-/* #undef IL_NO_MDL */
-
-/* MNG support */
-#define IL_NO_MNG 
-
-/* PCD support */
-/* #undef IL_NO_PCD */
-
-/* PCX support */
-/* #undef IL_NO_PCX */
-
-/* PIC support */
-/* #undef IL_NO_PIC */
-
-/* PIX support */
-/* #undef IL_NO_PIX */
-
-/* PNG support */
-// #define IL_NO_PNG 
-
-/* PNM support */
-/* #undef IL_NO_PNM */
-
-/* PSD support */
-/* #undef IL_NO_PSD */
-
-/* PSP support */
-/* #undef IL_NO_PSP */
-
-/* PXR support */
-/* #undef IL_NO_PXR */
-
-/* RAW support */
-/* #undef IL_NO_RAW */
-
-/* SGI support */
-/* #undef IL_NO_SGI */
-
-/* TGA support */
+#define IL_NO_HDR
+#define IL_NO_ICO
+#define IL_NO_ICNS
+#define IL_NO_JP2
+/* #undef IL_NO_JPG */
+#define IL_NO_LCMS
+#define IL_NO_LIF
+#define IL_NO_MDL
+#define IL_NO_MNG
+#define IL_NO_PCD
+#define IL_NO_PCX
+#define IL_NO_PIC
+#define IL_NO_PIX
+/* #undef IL_NO_PNG */
+#define IL_NO_PNM
+#define IL_NO_PSD
+#define IL_NO_PSP
+#define IL_NO_PXR
+#define IL_NO_RAW
+#define IL_NO_SGI
 /* #undef IL_NO_TGA */
-
-/* TIF support */
-#define IL_NO_TIF 
-
-/* WAD support */
-/* #undef IL_NO_WAD */
-
-/* WAL support */
-/* #undef IL_NO_WAL */
-
-/* XPM support */
-/* #undef IL_NO_XPM */
+#define IL_NO_TIF
+#define IL_NO_WAL
+#define IL_NO_XPM
+#define IL_NO_EXR
 
 /* Use libjpeg without modification. always enabled. */
 #define IL_USE_JPEGLIB_UNMODIFIED 
@@ -164,7 +115,9 @@
 #define MEMALIGN 
 
 /* mm_malloc memory allocation */
+#if !defined(__ppc__)
 #define MM_MALLOC 
+#endif
 
 /* Name of package */
 #define PACKAGE "DevIL"
@@ -188,16 +141,16 @@
 #define POSIX_MEMALIGN 
 
 /* restric keyword available */
-#define RESTRICT_KEYWORD 
+//#define RESTRICT_KEYWORD 
 
 /* SSE extension found */
 #define SSE 
 
 /* SSE2 extension found */
-#define SSE2 
+/* #undef SSE2 */
 
 /* SSE3 extension found */
-#define SSE3 
+/* #undef SSE3 */
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
