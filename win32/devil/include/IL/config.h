@@ -11,12 +11,12 @@
 #define IL_NO_DCX
 /* #undef IL_NO_DDS */
 /* #undef IL_NO_DOOM */
-#define IL_NO_GIF
+//#define IL_NO_GIF
 #define IL_NO_HDR
 #define IL_NO_ICO
 #define IL_NO_ICNS
 #define IL_NO_JP2
-#define IL_NO_JPG
+//#define IL_NO_JPG
 #define IL_NO_LCMS
 #define IL_NO_LIF
 #define IL_NO_MDL
@@ -25,7 +25,7 @@
 #define IL_NO_PCX
 #define IL_NO_PIC
 #define IL_NO_PIX
-#define IL_NO_PNG
+//#define IL_NO_PNG
 #define IL_NO_PNM
 #define IL_NO_PSD
 #define IL_NO_PSP
