@@ -89,7 +89,7 @@
 #define IL_NO_JP2 
 
 /* JPG support */
-#define IL_NO_JPG 
+//#define IL_NO_JPG 
 
 /* LCMS support */
 #define IL_NO_LCMS 
@@ -116,7 +116,7 @@
 /* #undef IL_NO_PIX */
 
 /* PNG support */
-#define IL_NO_PNG 
+// #define IL_NO_PNG 
 
 /* PNM support */
 /* #undef IL_NO_PNM */
