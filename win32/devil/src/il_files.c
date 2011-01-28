@@ -439,17 +439,21 @@ ILuint ILAPIENTRY iReadLump(ILvoid *Buffer, const ILuint Size, const ILuint Numb
 {
 	ILuint i, ByteSize = IL_MIN( Size*Number, ReadLumpSize-ReadLumpPos);
 
-	for (i = 0; i < ByteSize; i++) {
+
+	// stgatilov: the bounds check is always success anyway, so we may use memcpy instead
+	memcpy((ILubyte*)Buffer, (ILubyte*)ReadLump + ReadLumpPos, ByteSize);
+	i = ByteSize;
+/*	for (i = 0; i < ByteSize; i++) {
 		*((ILubyte*)Buffer + i) = *((ILubyte*)ReadLump + ReadLumpPos + i);
 		if (ReadLumpSize > 0) {  // ReadLumpSize is too large to care about apparently
-			if (ReadLumpPos + i > ReadLumpSize) {
+			if (ReadLumpPos + i > ReadLumpSize) {  // stgatilov: CAN IT HAPPEN?!!! I think not.
 				ReadLumpPos += i;
 				if (i != Number)
 					ilSetError(IL_FILE_READ_ERROR);
 				return i;
 			}
 		}
-	}
+	}*/
 
 	ReadLumpPos += i;
 	if (Size != 0)
