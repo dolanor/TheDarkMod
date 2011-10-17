@@ -43,7 +43,7 @@
 
 #if APU_HAVE_DB
 /* win32 note.. you will need to change this for db1 */
-#include "C:/Projects/Deps/db4-win32-4.4.20/include/db.h"
+#include "C:/SVN-1.7.0/db-4.8.30/build_windows/Win32/include/db.h"
 #endif
 
 #undef APU_WANT_DB
