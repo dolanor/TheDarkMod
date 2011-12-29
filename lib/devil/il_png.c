@@ -277,8 +277,14 @@ ILboolean readpng_get_image(ILdouble display_exponent)
 	             &bit_depth, &color_type, NULL, NULL, NULL);
 
 	// Expand low-bit-depth grayscale images to 8 bits
-	if (color_type == PNG_COLOR_TYPE_GRAY && bit_depth < 8) {
+	if (color_type == PNG_COLOR_TYPE_GRAY && bit_depth < 8)
+	{
+// greebo: We have libpng 1.4.x, hack this for proper linking
+#if PNG_LIBPNG_VER < 10400
 		png_set_gray_1_2_4_to_8(png_ptr);
+#else
+		png_set_expand_gray_1_2_4_to_8(png_ptr);
+#endif
 	}
 
 	// Expand RGB images with transparency to full alpha channels
