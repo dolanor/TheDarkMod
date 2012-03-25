@@ -260,6 +260,7 @@
       </PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <CompileAs>Default</CompileAs>
+      <ProgramDataBaseFileName>$(OutDir)libjpeg.pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Lib>
       <OutputFile>$(OutDir)libjpeg.lib</OutputFile>
