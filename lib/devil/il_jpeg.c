@@ -913,8 +913,9 @@ ILboolean iSaveJpegInternal()
 
 
 	if ((iCurImage->Format != IL_RGB && iCurImage->Format != IL_LUMINANCE) || iCurImage->Bpc != 1) {
-
-		TempImage = iConvertImage(iCurImage, IL_RGB, IL_UNSIGNED_BYTE);
+        // taaaki: since RGB_PIXELSIZE was changed to 4, the conversion to 
+        //         RGB is short one colour component, causing screenshots to crash
+		TempImage = iConvertImage(iCurImage, IL_RGBA, IL_UNSIGNED_BYTE);
 
 		if (TempImage == NULL) {
 
