@@ -911,8 +911,8 @@ ILboolean iSaveJpegInternal()
 		Quality = 99;*/
 
 
-
-	if ((iCurImage->Format != IL_RGB && iCurImage->Format != IL_LUMINANCE) || iCurImage->Bpc != 1) {
+	// angua: RGB images also need to be converted to RGBA
+	if ((iCurImage->Format != IL_RGBA && iCurImage->Format != IL_LUMINANCE) || iCurImage->Bpc != 1) {
         // taaaki: since RGB_PIXELSIZE was changed to 4, the conversion to 
         //         RGB is short one colour component, causing screenshots to crash
 		TempImage = iConvertImage(iCurImage, IL_RGBA, IL_UNSIGNED_BYTE);
