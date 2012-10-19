@@ -66,9 +66,7 @@ namespace boost { namespace numeric { namespace ublas {
             alloc_(a), size_ (size) {
           if (size_) {
               data_ = alloc_.allocate (size_);
-			  // stgatilov : use "(void)0," to suppress C4127 warning as explained here:
-			  // http://software.intel.com/en-us/forums/showthread.php?t=61895
-              if ((void)0, !detail::has_trivial_constructor<T>::value) {
+              if (! detail::has_trivial_constructor<T>::value) {
                   for (pointer d = data_; d != data_ + size_; ++d)
                       alloc_.construct(d, value_type());
               }
@@ -101,8 +99,7 @@ namespace boost { namespace numeric { namespace ublas {
         BOOST_UBLAS_INLINE
         ~unbounded_array () {
             if (size_) {
-			    // stgatilov : use "(void)0," to suppress C4127 warning
-                if ((void)0, !detail::has_trivial_destructor<T>::value) {
+                if (! detail::has_trivial_destructor<T>::value) {
                     // std::_Destroy (begin(), end(), alloc_);
                     const iterator i_end = end();
                     for (iterator i = begin (); i != i_end; ++i) {
@@ -141,8 +138,7 @@ namespace boost { namespace numeric { namespace ublas {
                         }
                     }
                     else {
-						// stgatilov : use "(void)0," to suppress C4127 warning
-                        if ((void)0, !detail::has_trivial_constructor<T>::value) {
+                        if (! detail::has_trivial_constructor<T>::value) {
                             for (pointer di = data_; di != data_ + size; ++di)
                                 alloc_.construct (di, value_type());
                         }
@@ -150,8 +146,7 @@ namespace boost { namespace numeric { namespace ublas {
                 }
 
                 if (size_) {
-					// stgatilov : use "(void)0," to suppress C4127 warning
-                    if ((void)0, !detail::has_trivial_destructor<T>::value) {
+                    if (! detail::has_trivial_destructor<T>::value) {
                         for (pointer si = p_data; si != p_data + size_; ++si)
                             alloc_.destroy (si);
                     }

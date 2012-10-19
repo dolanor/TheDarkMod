@@ -6,7 +6,7 @@
 #ifndef BOOST_GRAPH_STOER_WAGNER_MIN_CUT_HPP
 #define BOOST_GRAPH_STOER_WAGNER_MIN_CUT_HPP 1
 
-#include <cassert>
+#include <boost/assert.hpp>
 #include <set>
 #include <vector>
 #include <boost/concept_check.hpp>
@@ -20,7 +20,7 @@
 #include <boost/graph/detail/d_ary_heap.hpp>
 #include <boost/property_map/property_map.hpp>
 #include <boost/tuple/tuple.hpp>
-#include <boost/typeof/typeof.hpp>
+#include <boost/utility/result_of.hpp>
 
 namespace boost {
   
@@ -61,7 +61,7 @@ namespace boost {
       typedef typename boost::graph_traits<UndirectedGraph>::vertex_descriptor vertex_descriptor;
       typedef typename boost::property_traits<WeightMap>::value_type weight_type;
       
-      assert(pq.empty());
+      BOOST_ASSERT(pq.empty());
       typename KeyedUpdatablePriorityQueue::key_map keys = pq.keys();
       
       BGL_FORALL_VERTICES_T(v, g, UndirectedGraph) {
@@ -72,9 +72,10 @@ namespace boost {
         }
       }
       
-      assert(pq.size() >= 2);
+      BOOST_ASSERT(pq.size() >= 2);
       
-      vertex_descriptor s, t;
+      vertex_descriptor s = boost::graph_traits<UndirectedGraph>::null_vertex();
+      vertex_descriptor t = boost::graph_traits<UndirectedGraph>::null_vertex();
       weight_type w;
       while (!pq.empty()) { // while PQ \neq {} do
         const vertex_descriptor u = pq.top(); // u = extractmax(PQ)
@@ -168,7 +169,7 @@ namespace boost {
       weight_type bestW;
       
       boost::tie(s, t, bestW) = boost::detail::stoer_wagner_phase(g, assignments, assignedVertices, weights, pq);
-      assert(s != t);
+      BOOST_ASSERT(s != t);
       BGL_FORALL_VERTICES_T(v, g, UndirectedGraph) {
         put(parities, v, parity_type(v == t ? 1 : 0));
       }
@@ -179,7 +180,7 @@ namespace boost {
       for (; n >= 2; --n) {
         weight_type w;
         boost::tie(s, t, w) = boost::detail::stoer_wagner_phase(g, assignments, assignedVertices, weights, pq);
-        assert(s != t);
+        BOOST_ASSERT(s != t);
         
         if (w < bestW) {
           BGL_FORALL_VERTICES_T(v, g, UndirectedGraph) {
@@ -200,7 +201,7 @@ namespace boost {
         assignedVertices.insert(t);
       }
       
-      assert(pq.empty());
+      BOOST_ASSERT(pq.empty());
       
       return bestW;
     }
@@ -217,7 +218,9 @@ namespace boost {
     typedef boost::bgl_named_params<P, T, R> params_type;
     BOOST_GRAPH_DECLARE_CONVERTED_PARAMETERS(params_type, params)
     
-    BOOST_AUTO(pq, (boost::detail::make_priority_queue_from_arg_pack_gen<boost::graph::keywords::tag::max_priority_queue, weight_type, vertex_descriptor, std::greater<weight_type> >(choose_param(get_param(params, boost::distance_zero_t()), weight_type(0)))(g, arg_pack)));
+    typedef boost::detail::make_priority_queue_from_arg_pack_gen<boost::graph::keywords::tag::max_priority_queue, weight_type, vertex_descriptor, std::greater<weight_type> > gen_type;
+    gen_type gen(choose_param(get_param(params, boost::distance_zero_t()), weight_type(0)));
+    typename boost::result_of<gen_type(const UndirectedGraph&, const arg_pack_type&)>::type pq = gen(g, arg_pack);
     
     return boost::detail::stoer_wagner_min_cut(g,
         weights,
